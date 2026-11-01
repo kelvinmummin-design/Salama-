@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, Ambulance, BookOpen, Building2, ChevronRight, Heart, HeartHandshake, HeartPulse, Home, Landmark, Languages, MapPin, Phone, Scale, Search, Shield, Siren, WalletCards, X, Zap } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Ambulance, BookOpen, ChevronRight, Heart, HeartHandshake, HeartPulse, Home, Landmark, Languages, MapPin, Phone, Road, Scale, Search, Shield, Siren, WalletCards, X } from 'lucide-react';
 import initialNumbers from './data/numbers.json';
 import { findCounty } from './data/countyLookup.js';
 
 const GROUPS = [
   ['emergency','Emergency','Dharura',Siren,'Police · ambulance','Polisi · ambulansi'],['urgent-help','Urgent help','Msaada wa haraka',HeartHandshake,'Childline · GBV · Red Cross','Childline · GBV · Msalaba Mwekundu'],['health-wellbeing','Health & wellbeing','Afya na ustawi',HeartPulse,'Health · counselling','Afya · ushauri'],
-  ['justice-rights','Justice & rights','Haki na sheria',Scale,'Rights · reporting','Haki · kuripoti'],['citizen-services','Citizen services','Huduma za wananchi',Landmark,'Huduma · immigration','Huduma · uhamiaji'],['education-campus','Education & campus','Elimu na vyuo',BookOpen,'Schools · universities','Shule · vyuo vikuu'],['roads-utilities','Roads & utilities','Barabara na huduma',Zap,'Roads · power · water','Barabara · umeme · maji'],['money-consumer','Money & consumer','Fedha na watumiaji',WalletCards,'Banks · consumer help','Benki · msaada wa wateja']
+  ['justice-rights','Justice & rights','Haki na sheria',Scale,'Rights · reporting','Haki · kuripoti'],['citizen-services','Citizen services','Huduma za wananchi',Landmark,'Huduma · immigration','Huduma · uhamiaji'],['education-campus','Education & campus','Elimu na vyuo',BookOpen,'Schools · universities','Shule · vyuo vikuu'],['roads-utilities','Roads & utilities','Barabara na huduma',Road,'Roads · power · water','Barabara · umeme · maji'],['money-consumer','Money & consumer','Fedha na watumiaji',WalletCards,'Banks · consumer help','Benki · msaada wa wateja']
 ];
 const labels = {home:['Home','Nyumbani'],numbers:['All numbers','Namba zote'],favorites:['Saved numbers','Zilizohifadhiwa'],help:['Help now','Msaada sasa'],quiet:['Quiet help','Msaada wa siri'],privacy:['Privacy & updates','Faragha na masasisho'],group:['Numbers','Namba'],report:['Suggest a correction','Pendekeza marekebisho'],countdown:['Calling emergency services','Kupiga huduma za dharura']};
 const safeRead = (key, fallback) => { try { const value=localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; } };
