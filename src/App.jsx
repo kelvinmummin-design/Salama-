@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Copy, Heart, Home, Languages, MapPin, Phone, Search, Shield, Siren, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Ambulance, BookOpen, Building2, ChevronRight, Heart, HeartHandshake, HeartPulse, Home, Landmark, Languages, MapPin, Phone, Scale, Search, Shield, Siren, WalletCards, X, Zap } from 'lucide-react';
 import initialNumbers from './data/numbers.json';
 import { findCounty } from './data/countyLookup.js';
 
 const GROUPS = [
-  ['emergency','Emergency','Dharura'],['urgent-help','Urgent help','Msaada wa haraka'],['health-wellbeing','Health & wellbeing','Afya na ustawi'],
-  ['justice-rights','Justice & rights','Haki na sheria'],['citizen-services','Citizen services','Huduma za wananchi'],['education-campus','Education & campus','Elimu na vyuo'],['roads-utilities','Roads & utilities','Barabara na huduma'],['money-consumer','Money & consumer','Fedha na watumiaji']
+  ['emergency','Emergency','Dharura',Siren,'Police · ambulance','Polisi · ambulansi'],['urgent-help','Urgent help','Msaada wa haraka',HeartHandshake,'Childline · GBV · Red Cross','Childline · GBV · Msalaba Mwekundu'],['health-wellbeing','Health & wellbeing','Afya na ustawi',HeartPulse,'Health · counselling','Afya · ushauri'],
+  ['justice-rights','Justice & rights','Haki na sheria',Scale,'Rights · reporting','Haki · kuripoti'],['citizen-services','Citizen services','Huduma za wananchi',Landmark,'Huduma · immigration','Huduma · uhamiaji'],['education-campus','Education & campus','Elimu na vyuo',BookOpen,'Schools · universities','Shule · vyuo vikuu'],['roads-utilities','Roads & utilities','Barabara na huduma',Zap,'Roads · power · water','Barabara · umeme · maji'],['money-consumer','Money & consumer','Fedha na watumiaji',WalletCards,'Banks · consumer help','Benki · msaada wa wateja']
 ];
 const labels = {home:['Home','Nyumbani'],numbers:['All numbers','Namba zote'],favorites:['Saved numbers','Zilizohifadhiwa'],help:['Help now','Msaada sasa'],quiet:['Quiet help','Msaada wa siri'],privacy:['Privacy & updates','Faragha na masasisho'],group:['Numbers','Namba'],report:['Suggest a correction','Pendekeza marekebisho'],countdown:['Calling emergency services','Kupiga huduma za dharura']};
 const safeRead = (key, fallback) => { try { const value=localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; } };
@@ -57,17 +57,22 @@ export default function App(){
     <header className="topbar"><button className="brand" onClick={()=>go('home')}><span className="brand-mark"><Shield size={23}/></span><span><strong>Salama</strong><small>{txt('Help, close at hand','Msaada, karibu nawe',lang)}</small></span></button><button className="language" onClick={()=>setLang(lang==='en'?'sw':'en')} aria-label="Change language"><Languages size={16}/>{lang==='en'?' Kiswahili':' English'}</button></header><div className="amber-line"/>
     <main>
       {screen==='home'&&<>
-        <section className="intro"><div><p className="eyebrow">KENYA · {txt('OFFLINE READY','HUTUMIKA BILA INTANETI',lang)}</p><h1>{txt('Help, close at hand','Msaada, karibu nawe',lang)}</h1><p>{txt('Find trusted numbers and services near you.','Pata namba na huduma unazoweza kuamini.',lang)}</p></div><span className="intro-badge"><Shield size={25}/></span></section>
-        <SearchBox placeholder={txt('Search service, number or county','Tafuta huduma, namba au kaunti',lang)}/>
+        <section className="intro"><div><p className="eyebrow"><span className="kenya-mark" aria-hidden="true"><i/><i/><i/></span> KENYA · {txt('HELP IS HERE','MSAADA UPO HAPA',lang)}</p><h1>{txt('Help is close.','Msaada uko karibu.',lang)}</h1><p>{txt('Take one step at a time. Find the right help.','Chukua hatua moja kwa wakati. Pata msaada unaofaa.',lang)}</p></div><span className="intro-badge"><Shield size={25}/></span></section>
         {query?<div className="home-results">{searchRows.slice(0,6).map(n=><div key={n.id} className="search-result"><button onClick={()=>{setGroup(n.group);setScreen('group')}}><b>{name(n)}</b><small>{n.number} · {n.county}</small></button><a href={callHref(n)} aria-label={`Call ${name(n)}`}><Phone size={17}/></a></div>)}{!searchRows.length&&<p className="empty">{txt('No verified match found. Try another word or number.','Hakuna matokeo yaliyothibitishwa. Jaribu neno au namba nyingine.',lang)}</p>}<button className="inline-action" onClick={()=>go('numbers')}>{txt('Browse all numbers','Tazama namba zote',lang)} <ArrowRight size={15}/></button></div>:<>
-          {police&&<button className="emergency police" onClick={()=>startCall(police,true)}><span><small>{txt('POLICE EMERGENCY','DHARURA YA POLISI',lang)}</small><b>{police.number} · {name(police)}</b></span><span className="call-circle"><Phone size={20}/></span></button>}
-          {ambulance&&<button className="emergency ambulance" onClick={()=>startCall(ambulance,true)}><span><small>{txt('NATIONAL AMBULANCE','AMBULANSI YA TAIFA',lang)}</small><b>{ambulance.number} · {name(ambulance)}</b></span><Phone size={18}/></button>}
-          <button className="quiet-link" onClick={()=>go('quiet')}><Shield size={19}/>{txt('I need help but cannot talk','Nahitaji msaada lakini siwezi kuongea',lang)}<ChevronRight size={18}/></button>
-          <button className="quiet-link help-entry" onClick={()=>go('help')}><Siren size={19}/>{txt('Help now · calm steps','Msaada sasa · hatua tulivu',lang)}<ChevronRight size={18}/></button>
-          <p className="section-label">{txt('URGENT SUPPORT','MSAADA WA HARAKA',lang)}</p><div className="urgent-grid">{urgent.map(n=><button key={n.id} onClick={()=>startCall(n)}><span>{name(n)}</span><strong>{n.number}</strong></button>)}</div>
-          <div className="section-heading"><h2>{txt('Browse services','Tafuta huduma',lang)}</h2><button onClick={()=>go('numbers')}>{txt('All numbers','Namba zote',lang)} <ArrowRight size={15}/></button></div>
-          <div className="category-grid">{GROUPS.filter(([k])=>!['emergency','urgent-help'].includes(k)).map(([key,en,sw],i)=>{const count=items.filter(n=>n.group===key&&n.verification_status==='verified').length;return <button key={key} onClick={()=>openGroup(key)}><span className={`category-icon c${i%3}`}>{String(i+1).padStart(2,'0')}</span><b>{txt(en,sw,lang)}</b><small>{count}</small></button>})}</div>
-          <p className="trust-note">{txt('Directory works offline. Check each source and review date. Numbers may change; if a number fails, use another trusted emergency route.','Orodha hutumika bila intaneti. Angalia chanzo na tarehe ya ukaguzi kwa kila namba. Namba zinaweza kubadilika.',lang)} <button onClick={()=>go('privacy')}>{txt('Privacy and updates','Faragha na masasisho',lang)}</button></p>
+          <section className="first-actions" aria-label={txt('Choose the help you need','Chagua msaada unaohitaji',lang)}>
+            <p className="section-label">{txt('IS SOMEONE IN IMMEDIATE DANGER?','KUNA MTU YUKO HATARINI SASA?',lang)}</p>
+            {police&&<button className="emergency police" onClick={()=>startCall(police,true)}><span><small>{txt('POLICE · EMERGENCY','POLISI · DHARURA',lang)}</small><b>{police.number}</b><em>{txt('Tap to call · 3 second cancel','Gusa kupiga · ghairi ndani ya sekunde 3',lang)}</em></span><span className="call-circle"><Phone size={23}/></span></button>}
+            {ambulance&&<button className="emergency ambulance" onClick={()=>startCall(ambulance,true)}><span><small>{txt('AMBULANCE · NATIONAL DISPATCH','AMBULANSI · KITUO CHA TAIFA',lang)}</small><b>{ambulance.number}</b><em>{txt('Tap to call · 3 second cancel','Gusa kupiga · ghairi ndani ya sekunde 3',lang)}</em></span><span className="call-circle"><Ambulance size={22}/></span></button>}
+          </section>
+          <section className="calm-paths"><p className="section-label">{txt('OR CHOOSE A CALMER NEXT STEP','AU CHAGUA HATUA TULIVU',lang)}</p>
+            <button className="quiet-link" onClick={()=>go('help')}><span className="path-icon"><HeartPulse size={20}/></span><span><b>{txt('I need some help','Nahitaji msaada',lang)}</b><small>{txt('Simple steps, at your pace','Hatua rahisi, kwa mwendo wako',lang)}</small></span><ChevronRight size={19}/></button>
+            <button className="quiet-link" onClick={()=>go('quiet')}><span className="path-icon"><Shield size={20}/></span><span><b>{txt('I cannot talk safely','Siwezi kuongea kwa usalama',lang)}</b><small>{txt('Quiet options · nothing sent automatically','Njia za kimya · hakuna kinachotumwa kiotomatiki',lang)}</small></span><ChevronRight size={19}/></button>
+          </section>
+          <SearchBox placeholder={txt('Search a service, number or county','Tafuta huduma, namba au kaunti',lang)}/>
+          <div className="section-heading"><h2>{txt('Choose a service','Chagua huduma',lang)}</h2><button onClick={()=>go('numbers')}>{txt('All numbers','Namba zote',lang)} <ArrowRight size={15}/></button></div>
+          <div className="category-grid">{GROUPS.map(([key,en,sw,Icon,examplesEn,examplesSw])=>{const count=items.filter(n=>n.group===key&&n.verification_status==='verified').length;return <button key={key} onClick={()=>openGroup(key)}><span className={`category-icon ${key}`}><Icon size={22} strokeWidth={2.1} aria-hidden="true"/></span><b>{txt(en,sw,lang)}</b><small className="category-count">{count}</small><span className="category-examples">{txt(examplesEn,examplesSw,lang)}</span></button>})}</div>
+          <div className="urgent-shortcuts"><p className="section-label">{txt('QUICK SUPPORT','MSAADA WA HARAKA',lang)}</p><div className="urgent-grid">{urgent.map(n=><button key={n.id} onClick={()=>startCall(n)}><span>{name(n)}</span><strong>{n.number}</strong></button>)}</div></div>
+          <p className="trust-note">{txt('Made for Kenya. Works offline. Numbers can change; use another listed emergency route if a line does not connect.','Imetengenezwa kwa Kenya. Hutumika bila intaneti. Namba zinaweza kubadilika; jaribu njia nyingine ya dharura ikiwa simu haipatikani.',lang)} <button onClick={()=>go('privacy')}>{txt('Privacy & updates','Faragha na masasisho',lang)}</button></p>
         </>}
       </>}
       {(screen==='numbers'||screen==='group'||screen==='favorites')&&<>
@@ -85,6 +90,7 @@ export default function App(){
     <nav className="bottom-nav" aria-label="Main navigation"><button className={screen==='home'?'selected':''} onClick={()=>go('home')}><Home size={20}/>{txt('Home','Nyumbani',lang)}</button><button className={['numbers','group'].includes(screen)?'selected':''} onClick={()=>go('numbers')}><BookOpen size={20}/>{txt('Numbers','Namba',lang)}</button><button className={screen==='favorites'?'selected':''} onClick={()=>go('favorites')}><Heart size={20}/>{txt('Saved','Zilizohifadhiwa',lang)}</button></nav>
   </div>
 }
+
 
 
 
