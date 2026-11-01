@@ -9,12 +9,13 @@ const GROUPS = [
 ];
 const labels = {home:['Home','Nyumbani'],numbers:['All numbers','Namba zote'],favorites:['Saved numbers','Zilizohifadhiwa'],help:['Help now','Msaada sasa'],quiet:['Quiet help','Msaada wa siri'],privacy:['Privacy & updates','Faragha na masasisho'],group:['Numbers','Namba'],report:['Suggest a correction','Pendekeza marekebisho'],countdown:['Calling emergency services','Kupiga huduma za dharura']};
 const safeRead = (key, fallback) => { try { const value=localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; } };
+const loadDirectory = () => { const cached=safeRead('salama-directory',null); return Array.isArray(cached)&&JSON.stringify(cached)===JSON.stringify(initialNumbers)?cached:initialNumbers; };
 const digits = value => String(value||'').replace(/\D/g,'');
 const callHref = item => item.channel==='whatsapp' ? `https://wa.me/${digits(item.number)}` : item.channel==='sms' ? `sms:${item.number}` : `tel:${item.number}`;
 const txt = (en, sw, lang) => lang==='sw' ? sw : en;
 
 export default function App(){
-  const [items,setItems]=useState(()=>safeRead('salama-directory',initialNumbers));
+  const [items,setItems]=useState(loadDirectory);
   const [saved,setSaved]=useState(()=>safeRead('salama-saved',[]));
   const [lang,setLang]=useState(()=>localStorage.getItem('salama-language')||'en');
   const [screen,setScreen]=useState('home'); const [group,setGroup]=useState(''); const [query,setQuery]=useState(''); const [filter,setFilter]=useState('All');
