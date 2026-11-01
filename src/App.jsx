@@ -11,7 +11,8 @@ const labels = {home:['Home','Nyumbani'],numbers:['All numbers','Namba zote'],fa
 const safeRead = (key, fallback) => { try { const value=localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; } };
 const loadDirectory = () => { const cached=safeRead('salama-directory',null); return Array.isArray(cached)&&JSON.stringify(cached)===JSON.stringify(initialNumbers)?cached:initialNumbers; };
 const digits = value => String(value||'').replace(/\D/g,'');
-const callHref = item => item.channel==='whatsapp' ? `https://wa.me/${digits(item.number)}` : item.channel==='sms' ? `sms:${item.number}` : `tel:${item.number}`;
+const whatsappNumber = value => { const phone=digits(value); return phone.startsWith('0')&&phone.length===10 ? `254${phone.slice(1)}` : phone; };
+const callHref = item => item.channel==='whatsapp' ? `https://wa.me/${whatsappNumber(item.number)}` : item.channel==='sms' ? `sms:${item.number}` : `tel:${item.number}`;
 const txt = (en, sw, lang) => lang==='sw' ? sw : en;
 
 export default function App(){
