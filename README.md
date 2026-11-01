@@ -29,4 +29,3 @@ GitHub Pages deployment requires pushing this folder to a GitHub repository with
 ## Privacy
 
 No accounts, ads, analytics, remote fonts, or third-party runtime scripts. Favorites, language choice, and a downloaded directory copy stay in local storage. Location is requested only after a tap and is not written to storage. The update action requests only the public directory file; it sends no personal details. SMS opens a draft for the user and does not send automatically.
-

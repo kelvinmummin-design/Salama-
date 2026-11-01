@@ -1,0 +1,33 @@
+{
+  "policies": [
+    "No accounts, ads, analytics, third-party scripts, or remote fonts.",
+    "Location is requested only after a direct tap, read once, and not stored by the app.",
+    "Favorites and language preference stay on the device.",
+    "The optional update action requests only the public directory file; no personal data is sent.",
+    "SMS links only prepare a draft for the user. The app never sends a report automatically."
+  ],
+  "excluded_candidates": [
+    "Missing Child Kenya 0800 223 344 (no current authoritative confirmation found)",
+    "County-specific fire service numbers (needs county-by-county official source)",
+    "Any number without a current or authoritative source",
+    "National Public Health Emergency Operations Centre: 719 (reconfirmation_required)",
+    "KNEC assessment result enquiries: 0800 721 410 (reconfirmation_required)",
+    "KNEC assessment result enquiries: 0800 724 900 (reconfirmation_required)",
+    "Missing Child Kenya: 0800 223 344 (unverified)"
+  ],
+  "owner_confirmed_numbers": [],
+  "release_gates": [
+    "Directly confirm toll-free and short-code access across Safaricom, Airtel and Telkom; confirm 922 dispatch availability",
+    "Resolve and confirm preferred NTSA customer line (official NTSA pages list two different numbers)",
+    "Review Swahili with a qualified reviewer",
+    "Test emergency call flow, accessibility, offline mode and real devices/carriers",
+    "Publish only after all public directory rows and release gates pass"
+  ],
+  "research_notes": [
+    "Red Cross 1199 and St John Ambulance numbers corroborated by organization publications/pages on 2026-11-01.",
+    "NTSA official sources conflict: 0709 932 000 on contact page vs 0709 932 300 on service portal. Both source-specific entries are labelled.",
+    "Missing Child Kenya 0800 223 344 was not included because no authoritative current source was found.",
+    "Kenya Power 97771 and 0703 070 707 currently confirmed; older candidate 95551 excluded.",
+    "Historical National Public Health Emergency Operations Centre line 719 was found in a 2024 notice only; kept out of the live directory pending current reconfirmation."
+  ]
+}
