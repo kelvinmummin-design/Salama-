@@ -71,20 +71,6 @@
     "channel": "call"
   },
   {
-    "id": "st-john-tollfree",
-    "group": "urgent-help",
-    "name_en": "St John Ambulance (toll-free)",
-    "name_sw": "St John Ambulance (bila malipo)",
-    "number": "0800722540",
-    "hours": "24/7",
-    "county": "All counties",
-    "urgent": true,
-    "source_url": "https://www.linkedin.com/company/stjohnkenya/",
-    "source_label": "St John Ambulance Kenya official organization page",
-    "last_verified": "2026-11-01",
-    "verification_status": "verified"
-  },
-  {
     "id": "st-john-mobile",
     "group": "urgent-help",
     "name_en": "St John Ambulance",
@@ -94,21 +80,7 @@
     "county": "All counties",
     "urgent": true,
     "source_url": "https://www.stjohnkenya.org/contact",
-    "source_label": "St John Ambulance Kenya official contact page; 24/7 ambulance",
-    "last_verified": "2026-11-01",
-    "verification_status": "verified"
-  },
-  {
-    "id": "st-john-mobile-alt",
-    "group": "urgent-help",
-    "name_en": "St John Ambulance (alternate)",
-    "name_sw": "St John Ambulance (nambari nyingine)",
-    "number": "0721611555",
-    "hours": "24/7 emergency ambulance",
-    "county": "All counties",
-    "urgent": true,
-    "source_url": "https://www.stjohnkenya.org/regions",
-    "source_label": "St John Ambulance Kenya official regions page; emergency hotline",
+    "source_label": "St John Ambulance Kenya official contact page; 24/7 ambulance hotline",
     "last_verified": "2026-11-01",
     "verification_status": "verified"
   },
@@ -233,8 +205,8 @@
     "hours": "24/7 toll-free poison support",
     "county": "All counties",
     "urgent": true,
-    "source_url": "https://chemicalsportal.nema.go.ke/",
-    "source_label": "Kenya Chemicals Information Portal; KNH/Ministry of Health Poison Information Centre",
+    "source_url": "https://aakgrow.com/product-stewardship/",
+    "source_label": "AAK-GROW/CropLife Kenya official Poison Information Centre page",
     "last_verified": "2026-11-01",
     "verification_status": "verified"
   },
@@ -247,8 +219,8 @@
     "hours": "24/7 toll-free poison support",
     "county": "All counties",
     "urgent": true,
-    "source_url": "https://chemicalsportal.nema.go.ke/",
-    "source_label": "Kenya Chemicals Information Portal; KNH/Ministry of Health Poison Information Centre",
+    "source_url": "https://aakgrow.com/product-stewardship/",
+    "source_label": "AAK-GROW/CropLife Kenya official Poison Information Centre page",
     "last_verified": "2026-11-01",
     "verification_status": "verified"
   },
@@ -1105,8 +1077,8 @@
     "number": "0202303000",
     "hours": "Confirm operating hours",
     "urgent": false,
-    "source_url": "https://www.ombudsman.go.ke/sites/default/files/2025-03/Press%20Release--Call%20to%20Avert%20Healthcare%20Crisis%202025.pdf",
-    "source_label": "Commission on Administrative Justice official materials",
+    "source_url": "https://ombudsman.go.ke/faqs",
+    "source_label": "Office of the Ombudsman official FAQ; head office contact numbers",
     "county": "All counties",
     "last_verified": "2026-11-01",
     "verification_status": "verified"
@@ -1155,3 +1127,4 @@
     "verification_status": "verified"
   }
 ]
+
