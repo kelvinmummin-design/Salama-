@@ -30,5 +30,22 @@
     "source_url": "",
     "reason": "No authoritative current source found. Use Child Helpline 116 for child protection assistance.",
     "status": "unverified"
+  },
+  {
+    "id": "st-john-tollfree",
+    "organization": "St John Ambulance Kenya",
+    "number": "0800722540",
+    "source_url": "https://www.stjohnkenya.org/contact",
+    "reason": "Not found on the current St John Ambulance Kenya official contact or emergency pages. Do not list until the organization confirms it directly.",
+    "status": "unverified"
+  },
+  {
+    "id": "st-john-mobile-alt",
+    "organization": "St John Ambulance Kenya",
+    "number": "0721611555",
+    "source_url": "https://www.stjohnkenya.org/regions",
+    "reason": "Official St John pages conflict: the regions page labels this an emergency number, while the parent listing calls it office enquiries and the official contact page identifies 0721225285 as the 24/7 ambulance hotline. Excluded as an emergency contact pending direct confirmation.",
+    "status": "reconfirmation_required"
   }
 ]
+
