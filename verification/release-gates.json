@@ -1,7 +1,7 @@
 {
   "policies": [
     "No accounts, ads, analytics, third-party scripts, or remote fonts.",
-    "Location is requested only after a direct tap, read once, and not stored by the app.",
+    "Location is requested only after a direct tap. Quiet Help location is read once for a message draft; a user-requested location pin is stored on-device only for 3â€“24 hours, can be updated or removed, expires automatically, and is never shared or tracked in the background.",
     "Favorites and language preference stay on the device.",
     "The optional update action requests only the public directory file; no personal data is sent.",
     "SMS links only prepare a draft for the user. The app never sends a report automatically."
@@ -31,3 +31,4 @@
     "Historical National Public Health Emergency Operations Centre line 719 was found in a 2024 notice only; kept out of the live directory pending current reconfirmation."
   ]
 }
+
